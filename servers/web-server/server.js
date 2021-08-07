@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
-const io = require('socket.io')(server)
+const io = require('socket.io')(server, {cors : "http://localhost:3000"})
 
 
 
@@ -32,6 +32,8 @@ const {publisher, subscriber} = require("./middlewares/redis")
 
 const PORT = process.env.PORT || 5000
 
+//pub/sub
+
 subscriber.subscribe("iot-web")
 
 
@@ -43,7 +45,7 @@ app.use(express.urlencoded({
 app.use(helmet())
 app.use(compression())
 app.use(cors({
-    origin: 'http://localhost:8080',
+    origin: 'http://localhost:3000',
     methods: "GET,PUT,PATCH,POST,DELETE",
 }))
 

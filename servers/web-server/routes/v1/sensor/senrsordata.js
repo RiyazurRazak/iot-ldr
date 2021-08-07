@@ -11,8 +11,6 @@ router.get("/", (req,res)=>{
             console.error(err)
             res.send(err)
         }else{
-            console.table(data.rows)
-            console.log(data.rows)
             res.send(data.rows)
         }
   

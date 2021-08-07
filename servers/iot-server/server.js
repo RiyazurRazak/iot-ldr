@@ -29,7 +29,7 @@ app.use(compression())
 
 
 //constants
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8000
 
 subscriber.subscribe("web-iot")
 
@@ -45,7 +45,6 @@ let state = false;
 
 app.post("/values", (req, res)=>{
     const body = req.body
-    console.log(body)
     res.send("success")
     //send message to web server
     publisher.publish("iot-web", JSON.stringify(body))
@@ -65,7 +64,6 @@ app.get("/values", (req, res)=>{
 //recieving message from web server
 
 subscriber.on("message", (channel, message) => {
-    console.log("Received data :" + message)
     state = message.toLowerCase() === "true"
 })
 
